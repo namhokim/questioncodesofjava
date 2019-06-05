@@ -4,85 +4,91 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.math.BigDecimal;
 
 public class Calculator extends JFrame implements ActionListener {
-    public static final long serialVersionUID = 1L;
+    private JTextArea displayInputArea = new JTextArea(3, 25);
+    private JTextArea displayResultArea = new JTextArea(1, 21);
+    private JButton btnclear = new JButton("Clear");
+    private JButton btnsum = new JButton("=");
+    private JButton btnadd = new JButton("+");
+    private JButton btnsub = new JButton("-");
+    private JButton btnmul = new JButton("*");
+    private JButton btndiv = new JButton("/");
+    private JButton btn0 = new JButton("0");
+    private JButton btn1 = new JButton("1");
+    private JButton btn2 = new JButton("2");
+    private JButton btn3 = new JButton("3");
+    private JButton btn4 = new JButton("4");
+    private JButton btn5 = new JButton("5");
+    private JButton btn6 = new JButton("6");
+    private JButton btn7 = new JButton("7");
+    private JButton btn8 = new JButton("8");
+    private JButton btn9 = new JButton("9");
 
-    JTextArea txt1 = new JTextArea(3,28);
-    JTextArea txt2 = new JTextArea(1,21);
-    JButton btnclear = new JButton("Clear");
-    JButton btnsum = new JButton("=");
-    JButton btnadd = new JButton("+");
-    JButton btnsub = new JButton("-");
-    JButton btnmul = new JButton("*");
-    JButton btndiv = new JButton("/");
-    JButton btn0 = new JButton("0");
-    JButton btn1 = new JButton("1");
-    JButton btn2 = new JButton("2");
-    JButton btn3 = new JButton("3");
-    JButton btn4 = new JButton("4");
-    JButton btn5 = new JButton("5");
-    JButton btn6 = new JButton("6");
-    JButton btn7 = new JButton("7");
-    JButton btn8 = new JButton("8");
-    JButton btn9 = new JButton("9");
-    static int x,y;
-    String a,b="";
-    int sum[] = new int[4];
-    public static int cnt = 1;
+    private StringBuilder number1 = new StringBuilder();
+    private char operator = ' ';
+    private StringBuilder number2 = new StringBuilder();
 
     public Calculator(String title) {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(300,275);
+        setSize(300, 275);
         setTitle(title);
-        pad();
+        setLayout();
         setVisible(true);
     }
 
-    public void pad() {
+    public void setLayout() {
         setLayout(new BorderLayout());
         JPanel Top = new JPanel();
 
-        Top.add(txt1);
+        Top.add(displayInputArea);
 
         JPanel Center = new JPanel();
-        txt2.setBackground(Color.CYAN);
-        Center.add(new JLabel("연 산 결 과 "),"West");
-        Center.add(txt2,"East");
+        displayResultArea.setBackground(Color.CYAN);
+        Center.add(new JLabel("연 산 결 과 "), "West");
+        Center.add(displayResultArea, "East");
 
         JPanel Bottom = new JPanel();
         Bottom.setLayout(new BorderLayout());
         JPanel btnT = new JPanel();
-        btnT.setLayout(new GridLayout(1,2));
-        btnT.add(btnclear); btnT.add(btnsum);
+        btnT.setLayout(new GridLayout(1, 2));
+        btnT.add(btnclear);
+        btnT.add(btnsum);
 
         JPanel btnC = new JPanel();
         btnC.setLayout(new BorderLayout());
         JPanel btnC1 = new JPanel();
-        btnC1.setLayout(new GridLayout(3,3));
-        btnC1.add(btn1); btnC1.add(btn2); btnC1.add(btn3);
-        btnC1.add(btn4); btnC1.add(btn5); btnC1.add(btn6);
-        btnC1.add(btn7); btnC1.add(btn8); btnC1.add(btn9);
-        btnC.add(btnC1,"North");
+        btnC1.setLayout(new GridLayout(3, 3));
+        btnC1.add(btn1);
+        btnC1.add(btn2);
+        btnC1.add(btn3);
+        btnC1.add(btn4);
+        btnC1.add(btn5);
+        btnC1.add(btn6);
+        btnC1.add(btn7);
+        btnC1.add(btn8);
+        btnC1.add(btn9);
+        btnC.add(btnC1, "North");
         JPanel btnC2 = new JPanel();
-        btnC2.setLayout(new GridLayout(0,1));
+        btnC2.setLayout(new GridLayout(0, 1));
         btnC2.add(btn0);
-        btnC.add(btnC2,"South");
+        btnC.add(btnC2, "South");
 
         JPanel btnR = new JPanel();
-        btnR.setLayout(new GridLayout(4,1));
+        btnR.setLayout(new GridLayout(4, 1));
         btnR.add(btnadd);
         btnR.add(btnsub);
         btnR.add(btnmul);
         btnR.add(btndiv);
 
-        Bottom.add(btnT,"North");
-        Bottom.add(btnC,"Center");
-        Bottom.add(btnR,"East");
+        Bottom.add(btnT, "North");
+        Bottom.add(btnC, "Center");
+        Bottom.add(btnR, "East");
 
-        add(Top,"North");
-        add(Center,"Center");
-        add(Bottom,"South");
+        add(Top, "North");
+        add(Center, "Center");
+        add(Bottom, "South");
 
         btnclear.addActionListener(this);
         btnsum.addActionListener(this);
@@ -102,97 +108,69 @@ public class Calculator extends JFrame implements ActionListener {
         btn9.addActionListener(this);
     }
 
+    @Override
     public void actionPerformed(ActionEvent evt) {
         String value = evt.getActionCommand();
-        if(value.equals("Clear")) {
-            txt1.setText("");
-            txt2.setText("");
+        if (value.matches("[0-9]")) {
+            appendNumber(value);
+        } else if (value.matches("[+/*\\-]")) {
+            setOperator(value);
+        } else if (value.equals("Clear")) {
+            clear();
+        } else if (value.equals("=")) {
+            evaluate();
         }
+        refreshDisplayPad();
+    }
 
-        else {
-            txt1.append(value);
-
-            if(value.equals("0")|value.equals("1")|value.equals("2")
-                    |value.equals("3")|value.equals("4")|value.equals("5")
-                    |value.equals("6")|value.equals("7")|value.equals("8")
-                    |value.equals("9")) {
-
-                if(cnt==1) {
-                    a += value;
-                    x = Integer.parseInt(a);
-                }
-                else if (cnt==2) {
-                    b += value;
-                    y = Integer.parseInt(b);
-                }
-            }
-
-
-            if (x!=0 && y!=0) {
-                if(sum[0] == 1) {
-                    x += y;
-                    cnt--;
-                }
-                else if(sum[1] == 1) {
-                    x -= y;
-                    cnt--;
-                }
-                else if(sum[2] == 1) {
-                    x *= y;
-                    cnt--;
-                }
-                else if(sum[3] == 1) {
-                    x /= y;
-                    cnt--;
-                }
-                sum[0] = 0;
-                sum[1] = 0;
-                sum[2] = 0;
-                sum[3] = 0;
-            }
-        }
-
-        switch(value) {
-            case "+" :
-                sum[0] = 1;
-                sum[1] = 0;
-                sum[2] = 0;
-                sum[3] = 0;
-                cnt++;
-                break;
-            case "-" :
-                sum[0] = 0;
-                sum[1] = 1;
-                sum[2] = 0;
-                sum[3] = 0;
-                cnt++;
-                break;
-            case "*" :
-                sum[0] = 0;
-                sum[1] = 0;
-                sum[2] = 1;
-                sum[3] = 0;
-                cnt++;
-                break;
-            case "/" :
-                sum[0] = 0;
-                sum[1] = 0;
-                sum[2] = 0;
-                sum[3] = 1;
-                cnt++;
-                break;
-            case "=" :
-                y=0;
-                txt2.setText(x+"");
-                break;
-            case "clear" :
-                x=0;
-                y=0;
-                break;
+    private void appendNumber(String value) {
+        if (operator != ' ') {
+            number1.append(value);
+        } else {
+            number2.append(value);
         }
     }
 
+    private void setOperator(String value) {
+        operator = value.charAt(0);
+    }
+
+    private void clear() {
+        number1.setLength(0);
+        operator = ' ';
+        number2.setLength(0);
+    }
+
+    private void evaluate() {
+        BigDecimal bigDecimal1 = new BigDecimal(number1.toString());
+        BigDecimal bigDecimal2 = new BigDecimal(number2.toString());
+        BigDecimal result;
+        switch (operator) {
+            case '+':
+                result = bigDecimal1.add(bigDecimal2);
+                break;
+            case '-':
+                result = bigDecimal1.subtract(bigDecimal2);
+                break;
+            case '*':
+                result = bigDecimal1.multiply(bigDecimal2);
+                break;
+            case '/':
+                result = bigDecimal1.divide(bigDecimal2, BigDecimal.ROUND_UNNECESSARY);
+                break;
+            default:
+                result = new BigDecimal(0);
+        }
+        clear();
+        displayResultArea.setText(result.toString());
+    }
+
+    private void refreshDisplayPad() {
+        final String displayText = String.format("%s%n%c%n%s", number2.toString(), operator, number1.toString());
+        displayInputArea.setText(displayText);
+    }
+
     public static void main(String[] args) {
-        Calculator cal = new Calculator("계산기");
+        new Calculator("계산기");
     }
 }
