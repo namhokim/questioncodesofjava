@@ -13,7 +13,7 @@ import java.util.*;
 public class UserInterface {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        Management manager = new Management();//매니저 객체 생성
+        Management manager = Management.getInstance();
         int totalSales = 0;//오늘의 총 매출
         while (true) {
             Menu.mainMenu();//메인 메뉴를 보여준다
@@ -268,6 +268,8 @@ public class UserInterface {
                                     break;
                                 case 0://종료
                                     System.out.println("프로그램을 종료하도록 하겠습니다.");
+                                    manager.saveToFile();
+                                    System.exit(0);
                                     break;
                                 default:
                                     System.out.println("다시 입력하세요 ");

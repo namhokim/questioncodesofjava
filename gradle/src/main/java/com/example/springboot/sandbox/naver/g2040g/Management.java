@@ -1,11 +1,44 @@
 package com.example.springboot.sandbox.naver.g2040g;
 
-import java.io.Serializable;
+import com.google.gson.Gson;
+
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 
 //편의점 클래스 정의 Management class
 public class Management {
     private int manageSize = 0;//배열에 들어있는 객체 개수
     private Goods[] goods = new Goods[100];//물품 배열 선언
+
+    private static final String FILE = "management.json";
+
+    public static Management getInstance() {
+        File file = new File(FILE);
+        try {
+            if (file.exists()) {
+                try (FileReader reader = new FileReader(file)) {
+                    Gson gson = new Gson();
+                    return gson.fromJson(reader, Management.class);
+                }
+            }
+        } catch (Exception ex) {
+            // nothing doing here
+        }
+        return new Management();
+    }
+
+    public void saveToFile() {
+        try {
+            File file = new File(FILE);
+            try (FileWriter writer = new FileWriter(file, true)) {
+                Gson gson = new Gson();
+                gson.toJson(this, Management.class, writer);
+            }
+        } catch (Exception ex) {
+            // nothing
+        }
+    }
 
 
     public void insertGoods(Goods newGoods) throws Exception { // 물품 리스트에 물품 객체 삽입
