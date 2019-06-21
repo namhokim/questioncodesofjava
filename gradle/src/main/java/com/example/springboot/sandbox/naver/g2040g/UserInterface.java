@@ -11,7 +11,7 @@ import java.util.*;
  * 1개 등록->삭제->출력->코드번호 2로 뜸
  */
 public class UserInterface {
-    public static void main(String args[]) throws Exception {
+    public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         Management manager = new Management();//매니저 객체 생성
         int totalSales = 0;//오늘의 총 매출
@@ -35,18 +35,18 @@ public class UserInterface {
                                 System.out.println(manager.printGoods(i));//전체 물품 출력
                             }
                             try {
-                                System.out.printf("구매할 물품 이름:");
+                                System.out.print("구매할 물품 이름:");
                                 String goodsName = scan.nextLine();
                                 int index = manager.findGoodsIndex(goodsName);//물품의 인덱스
                                 System.out.println("((((((구매할 물품 정보))))))");
                                 System.out.println(manager.printGoods(index));//구매할 물품 정보
                                 try {// 카테고리로 물품 찾기
                                     System.out.println("물품을 구매하시겠습니까?");
-                                    System.out.printf("구매하면1, 구매안하면0을 입력해주세요:");
+                                    System.out.print("구매하면1, 구매안하면0을 입력해주세요:");
                                     int buy = scan.nextInt();
                                     scan.nextLine();
                                     if (buy == 1) {//구매할 때
-                                        System.out.printf("구매 수량을 입력해주세요:");
+                                        System.out.print("구매 수량을 입력해주세요:");
                                         int sellCount = scan.nextInt();
                                         scan.nextLine();
                                         if (sellCount > manager.sellEstimate(index, sellCount)) {//구매 원하는 수량>존재하는 재고
@@ -87,14 +87,14 @@ public class UserInterface {
                                     System.out.println("====등록될 상품목록을 입력해주세요====");//물품 등록
                                     try {
                                         //등록할 물품 정보 입력
-                                        System.out.printf("물품 카테고리를 입력하세요:");
+                                        System.out.print("물품 카테고리를 입력하세요:");
                                         String cate = scan.next();
-                                        System.out.printf("물품 이름을 입력하세요:");
+                                        System.out.print("물품 이름을 입력하세요:");
                                         String name = scan.next();
-                                        System.out.printf("물품 가격을 입력하세요:");
+                                        System.out.print("물품 가격을 입력하세요:");
                                         int price = scan.nextInt();
                                         scan.nextLine();
-                                        System.out.printf("물품 개수를 입력하세요:");
+                                        System.out.print("물품 개수를 입력하세요:");
                                         int stock = scan.nextInt();
                                         Goods newGoods = new Goods(cate, name, price, stock); // Goods 객체 생성
                                         try {
@@ -124,7 +124,7 @@ public class UserInterface {
                                         }
                                         {
                                             try {
-                                                System.out.printf("수정할 물품 이름을 입력하세요:");
+                                                System.out.print("수정할 물품 이름을 입력하세요:");
                                                 String changeName = scan.next();
                                                 int index = manager.findGoodsIndex(changeName);//이름의 인덱스 찾아주기
                                                 {//물품 정보 출력
@@ -135,14 +135,14 @@ public class UserInterface {
                                                 System.out.println("-------------------------");
                                                 System.out.println("물품번호: [" + (index + 1) + "]\n");
                                                 //수정할 물품에 대한 정보 입력
-                                                System.out.printf("수정할 물품 카테고리를 입력하세요:");
+                                                System.out.print("수정할 물품 카테고리를 입력하세요:");
                                                 String change_cate = scan.next();
-                                                System.out.printf("수정할 물품 이름을 입력하세요:");
+                                                System.out.print("수정할 물품 이름을 입력하세요:");
                                                 String change_n = scan.next();
-                                                System.out.printf("수정할 물품 가격을 입력하세요:");
+                                                System.out.print("수정할 물품 가격을 입력하세요:");
                                                 int change_p = scan.nextInt();
                                                 scan.nextLine();
-                                                System.out.printf("수정할 물품 개수를 입력하세요:");
+                                                System.out.print("수정할 물품 개수를 입력하세요:");
                                                 int change_s = scan.nextInt();
                                                 scan.nextLine();
 
@@ -153,7 +153,6 @@ public class UserInterface {
                                                 //수정된 데이터를 출력한다.
                                                 System.out.println(manager.printGoods(index));
                                             } catch (Exception e) { // 찾는 물품이  없을 경우
-                                                String msg = e.getMessage();
                                                 System.out.println("찾는 물품이 없습니다.");
                                             }
 
@@ -192,7 +191,7 @@ public class UserInterface {
                                                     System.out.println("---삭제 가능한 물품 목록---");
                                                     System.out.println("[" + (i + 1) + "] " + manager.printGoods(i));
                                                 }
-                                                System.out.printf("삭제할 물품명 입력해주세요:");
+                                                System.out.print("삭제할 물품명 입력해주세요:");
                                                 String deleteName = scan.next();
                                                 try {
                                                     int deletIndex = manager.findGoodsIndex(deleteName);//삭제할 물품의 인덱스를 찾음
@@ -200,7 +199,6 @@ public class UserInterface {
                                                     manager.deleteGoods(deletIndex);//물품 삭제
                                                     System.out.println("물품이 삭제되었습니다.");
                                                 } catch (Exception e) {//찾는 물품이 없는 경우
-                                                    String msg = e.getMessage();
                                                     System.out.println("찾는 물품이 없습니다.");
                                                 }
                                                 break;
@@ -231,11 +229,11 @@ public class UserInterface {
                                                 System.out.println("---검색 가능한 물품 목록---");
                                                 System.out.println("[" + (i + 1) + "] " + manager.printGoods(i));
                                             }
-                                            System.out.printf("물품 카테고리를 입력해주세요:");
+                                            System.out.print("물품 카테고리를 입력해주세요:");
                                             String category = scan.next();
                                             try {
                                                 System.out.println("-------카테고리 " + category + "에 속하는 물품-------");
-                                                Goods findgoods[] = manager.findGoodsCategory(category);
+                                                Goods[] findgoods = manager.findGoodsCategory(category);
                                                 for (int i = 0; i < manager.getManageSize(); i++) {//출력
                                                     if (findgoods[i] != null) {//물품 정보 출력
                                                         System.out.println("물품명:" + findgoods[i].getName()); // 물품 출력
@@ -246,7 +244,6 @@ public class UserInterface {
                                                     }
                                                 }
                                             } catch (Exception e) { // 대분류를 찾지 못한 경우
-                                                String msg = e.getMessage();
                                                 System.out.println("찾는 물품이 없습니다.");
                                             }
 
@@ -256,7 +253,7 @@ public class UserInterface {
                                                 System.out.println("---검색 가능한 물품 목록---");
                                                 System.out.println("[" + (i + 1) + "] " + manager.printGoods(i));
                                             }
-                                            System.out.printf("물품명을 입력해주세요:");
+                                            System.out.print("물품명을 입력해주세요:");
                                             String goodsName = scan.nextLine();
                                             try {
                                                 int index = manager.findGoodsIndex(goodsName); // 물품의 인덱스

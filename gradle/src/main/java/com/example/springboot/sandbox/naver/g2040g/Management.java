@@ -1,9 +1,11 @@
 package com.example.springboot.sandbox.naver.g2040g;
 
+import java.io.Serializable;
+
 //편의점 클래스 정의 Management class
 public class Management {
     private int manageSize = 0;//배열에 들어있는 객체 개수
-    private Goods goods[] = new Goods[100];//물품 배열 선언
+    private Goods[] goods = new Goods[100];//물품 배열 선언
 
 
     public void insertGoods(Goods newGoods) throws Exception { // 물품 리스트에 물품 객체 삽입
@@ -41,7 +43,7 @@ public class Management {
                 break;
             }
         }
-        if (find == false) {
+        if (!find) {
             throw new Exception("찾는 물품이 없습니다.");//찾는 물품이 없을 때
         }
         return goodsIndex;
@@ -49,22 +51,21 @@ public class Management {
 
 
     public void deleteGoods(int index) {//물품 삭제
-        for (int i = index; i < manageSize; i++) {
-            goods[i] = goods[i + 1];//한칸씩 밀기
-        }
+        //한칸씩 밀기
+        if (manageSize - index >= 0) System.arraycopy(goods, index + 1, goods, index, manageSize - index);
         manageSize--;////삭제하기
     }
 
     public Goods[] findGoodsCategory(String categoryName) throws Exception {//카테고리 찾아줌
         boolean find = false; //대분류 찾았는지
-        Goods findGoods[] = new Goods[manageSize]; //반환할 배열
+        Goods[] findGoods = new Goods[manageSize]; //반환할 배열
         for (int i = 0; i < manageSize; i++) {
             if (categoryName.equals(goods[i].getCategory())) {//찾는 대분류=물품 대분류
                 findGoods[i] = goods[i]; //찾는것과 같다
                 find = true;//찾았음
             }
         }
-        if (find == false) {//못찾았을 때
+        if (!find) {//못찾았을 때
             throw new Exception("찾는 카테고리가 없습니다.");
         }
         return findGoods; //배열 반환
@@ -77,9 +78,8 @@ public class Management {
         return goods[index].getStock();//구매 이전의 물품 재고
     }
 
-    int payment = 0;//지불 금액
-
     public int sell(int index, int sellCount) throws Exception {//구매를 행하는 함수
+        int payment;    //지불 금액
         if (sellCount > goods[index].getStock()) {//재고가 없을 때
             throw new Exception("재고가 부족해서 구매를 진행할 수 없습니다.");
         } else {
