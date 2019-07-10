@@ -14,10 +14,10 @@ public class MessageFormatEx3 {
         String pattern = "INSERT INTO CUST_INFO VALUES ({0}, {1}, {2}, {3}};";
         MessageFormat mf = new MessageFormat(pattern);
 
-        for (int i = 0; i < data.length; i++) {
-            Object[] objs = mf.parse(data[i]);
-            for (int j = 0; j < objs.length; j++) {
-                System.out.print(objs[j] + ",");
+        for (String datum : data) {
+            Object[] objs = mf.parse(datum);
+            for (Object obj : objs) {
+                System.out.print(obj + ",");
             }
             System.out.println();
         }
