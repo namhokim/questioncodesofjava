@@ -5,6 +5,9 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * mock data를 내려줌
+ */
 @Service
 public class CallInfoService {
     public List<CallVO> callInfo(String s_name) {
