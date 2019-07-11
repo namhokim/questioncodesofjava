@@ -3,7 +3,7 @@ package com.example.springboot.sandbox.naver.teen6123.abstarcthashmap;
 import java.util.HashMap;
 
 abstract class ABSTAC {
-    static HashMap<String, ABSTAC> map = new HashMap<String, ABSTAC>();
+    static HashMap<String, ABSTAC> map = new HashMap<>();
     static
     {
         map.put("cls1", new CLS1());

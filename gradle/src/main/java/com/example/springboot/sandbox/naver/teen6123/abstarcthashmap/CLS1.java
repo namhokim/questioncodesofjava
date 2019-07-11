@@ -5,15 +5,11 @@ public class CLS1 extends ABSTAC {
     String var = "";
 
     public void setString(String str) {
-
         this.var = str;
-
     }
 
     public String getString() {
-
         return this.var;
-
     }
 
 }
