@@ -5,6 +5,7 @@ import com.example.springboot.sandbox.model.Fruit;
 import java.util.ArrayList;
 import java.util.List;
 
+//public class FruitBox<T extends Fruit & Catchable> {
 public class FruitBox<T extends Fruit & Eatable> {
     private List<T> list;
 
