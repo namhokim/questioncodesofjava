@@ -9,12 +9,6 @@ public class Apple extends Fruit implements Eatable {
         this.name = name;
     }
 
-    public static void main(String[] args) {
-        FruitBox<Apple> fruitBox = new FruitBox<>();
-        fruitBox.add(new Apple("Busa"));
-        System.out.println(fruitBox.get(0));
-    }
-
     @Override
     public void eat() {
         System.out.println("I eat an apple.");
@@ -25,5 +19,11 @@ public class Apple extends Fruit implements Eatable {
         return "Apple{" +
                 "name='" + name + '\'' +
                 '}';
+    }
+
+    public static void main(String[] args) {
+        FruitBox<Apple> fruitBox = new FruitBox<>();
+        fruitBox.add(new Apple("Busa"));
+        System.out.println(fruitBox.get(0));
     }
 }
