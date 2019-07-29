@@ -8,8 +8,10 @@ public class Main {
 
         StringTokenizer st = new StringTokenizer(str, ",");
 
-        System.out.println("토큰 수 : " + st.countTokens());
-        for(int i=0; i<st.countTokens(); i++)
+        int countTokens = st.countTokens();
+        System.out.println("토큰 수 : " + countTokens);
+        for (int i = 0; i < countTokens; i++) {
             System.out.println(st.nextToken());
+        }
     }
 }
