@@ -10,7 +10,7 @@ public class Main {
 
         int countTokens = st.countTokens();
         System.out.println("토큰 수 : " + countTokens);
-        for (int i = 0; i < countTokens; i++) {
+        while (st.hasMoreTokens()) {
             System.out.println(st.nextToken());
         }
     }
