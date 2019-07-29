@@ -5,13 +5,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @Slf4j
+//@Scope(value="request")
 @RestController
 public class HelloController {
 
     private final ConversionService conversionService;
+
+    @Autowired
+    private HttpServletRequest httpServletRequest;
 
     @Autowired
     public HelloController(ConversionService conversionService) {
@@ -19,7 +24,10 @@ public class HelloController {
     }
 
     @RequestMapping("/")
-    public String hello(@RequestBody(required = false) @Valid FooDto fooDto) {
+    public String hello(@RequestBody(required = false) @Valid FooDto fooDto, HttpServletRequest request) throws InterruptedException {
+        log.info("request (autowired): {}, {}", httpServletRequest.hashCode(), httpServletRequest.toString());
+        log.info("request (parameter): {}, {}", request.hashCode(), request.toString());
+        Thread.sleep(3000);
         if (fooDto == null) {
             return "Need FooDto";
         }
