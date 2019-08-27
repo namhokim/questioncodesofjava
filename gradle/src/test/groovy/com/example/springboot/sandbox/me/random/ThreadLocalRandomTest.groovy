@@ -1,5 +1,6 @@
 package com.example.springboot.sandbox.me.random
 
+import groovy.transform.Synchronized
 import spock.lang.Shared
 import spock.lang.Specification
 
@@ -15,14 +16,35 @@ class ThreadLocalRandomTest extends Specification {
 
     def cleanupSpec() {
         println count
+        println count.sum()
         println standardDeviation(count, 0)
+    }
+
+    @Synchronized
+    void increaseCount(int result) {
+        count[result]++
     }
 
     def "test using ThreadLocalRandom"() {
         when:
         for (int i = 0; i < 100; i++) {
-            int nextint = ThreadLocalRandom.current().nextInt(100)
-            count[nextint]++
+            Thread.start {
+                int nextint = ThreadLocalRandom.current().nextInt(100)
+                increaseCount(nextint)
+            }
+        }
+
+        then:
+        count.length > 0
+    }
+
+    def "test using Math.random"() {
+        when:
+        for (int i = 0; i < 100; i++) {
+            Thread.start {
+                int nextint = (int)(Math.random() * 100)
+                increaseCount(nextint)
+            }
         }
 
         then:
@@ -30,13 +52,13 @@ class ThreadLocalRandomTest extends Specification {
     }
 
     def "test using random"() {
-        given:
-        def random = new Random()
-
         when:
         for (int i = 0; i < 100; i++) {
-            int nextint = random.nextInt(100)
-            count[nextint]++
+            Thread.start {
+                def random = new Random()
+                int nextint = random.nextInt(100)
+                count[nextint]++
+            }
         }
 
         then:
