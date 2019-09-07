@@ -16,11 +16,9 @@ public class DistinctArrayList {
         System.out.print("검색할 이름을 입력하세요 : ");
         String srcName = sc.nextLine();
 
-        for (Person person : pList) {
-            if (srcName.equals(person.getName())) {
-                System.out.println(person);
-            }
-        }
+        pList.stream()
+                .filter(person -> person.getName().equals(srcName))
+                .forEach(System.out::println);
     }
 }
 
