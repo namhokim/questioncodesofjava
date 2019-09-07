@@ -6,52 +6,54 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.net.SocketException;
 import java.util.Scanner;
 
 @Slf4j
 public class Client implements Runnable {
 
-    static DatagramSocket clientSocket;   // 소켓
-    static byte[] IP = {127, 0, 0, 1};       // 서버 IP
-    static InetAddress IPAddress;         // 서버 IP
-    static byte[] sendData;               // 전송할 데이터
-    static byte[] receiveData;           // 전송받은 데이터
-    static DatagramPacket sendPacket;     // 출력 패킷
-    static DatagramPacket receivePacket;  // 입력 패킷
+    private InetAddress serverAddress;
+    private int serverPort;
+    private DatagramSocket clientSocket;   // 소켓
 
-    Thread t = new Thread(this);
-    public Client() {
-        t.start();
+    private Client(InetAddress serverAddress, int serverPort) throws SocketException {
+        this.serverAddress = serverAddress;
+        this.serverPort = serverPort;
+        this.clientSocket = new DatagramSocket();
     }
 
     public static void main(String[] args) throws IOException {
-        clientSocket = new DatagramSocket();
-        IPAddress = InetAddress.getByAddress(IP);
-        sendData = new byte[1024];
-        receiveData = new byte[1024];
+        Client client = new Client(InetAddress.getLoopbackAddress(), 9876);
+
+        Thread threadForReceive = new Thread(client);
+        threadForReceive.start();
 
         Scanner sc = new Scanner(System.in);
-
-        new Client();
         while (true) {
-            String sentance = sc.next();
-            sendData = sentance.getBytes();
-            sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, 9876);
-            clientSocket.send(sendPacket);
+            String lineWithoutLF = sc.nextLine();
+            String lineWithLF = String.format("%s%n", lineWithoutLF);
+            client.send(lineWithLF);
         }
+    }
+
+    private void send(String message) throws IOException {
+        byte[] sendData = message.getBytes();
+        DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, serverAddress, serverPort);
+        clientSocket.send(sendPacket);
     }
 
     @Override
     public void run() {
         while (true) {
-            receivePacket = new DatagramPacket(receiveData, receiveData.length);
+            byte[] receiveData = new byte[1024];
+            DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
             try {
-                clientSocket.receive(receivePacket);   // 서버로 부터 채팅을 받음
+                clientSocket.receive(receivePacket);   // 서버로 부터 메시지를 받음
             } catch (IOException e) {
                 log.error("Client exception", e);
             }
-            String re = new String(receivePacket.getData());
-            System.out.println(re);
+            String message = new String(receiveData, 0, receivePacket.getLength());
+            System.out.print(message);
         }
     }
 }
