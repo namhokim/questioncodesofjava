@@ -14,15 +14,12 @@ public class DistinctArrayList {
 
         Scanner sc = new Scanner(System.in);
         System.out.print("검색할 이름을 입력하세요 : ");
-        Person srcPerson = new Person();
         String srcName = sc.nextLine();
 
-        //객체에 Person클래스에 있는 setter 사용 이름입력
-        srcPerson.setName(srcName);
-
-        int index = pList.indexOf(srcPerson);
-        if (index != -1) {
-            System.out.println(pList.get(index));
+        for (Person person : pList) {
+            if (srcName.equals(person.getName())) {
+                System.out.println(person);
+            }
         }
     }
 }
