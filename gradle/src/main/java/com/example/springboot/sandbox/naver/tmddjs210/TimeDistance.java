@@ -8,11 +8,9 @@ import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 
 public class TimeDistance {
-    public static void main(String[] args) {
-        long pastEpoch = 1551500880000L;    //  2019년 3월 2일 13시 20분 타임스탬프
-        LocalDateTime point = LocalDateTime.of(2019, 3, 4, 13, 20);
-        final long days = getDaysFrom(pastEpoch, point);
-        System.out.printf("%d일 지났습니다%n", days);
+
+    private TimeDistance() {
+        // make utility class
     }
 
     public static long getDaysFrom(long epochMilliseconds, @Null LocalDateTime comparePoint) {
