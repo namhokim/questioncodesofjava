@@ -1,10 +1,11 @@
 package com.example.springboot.sandbox.naver.tmddjs210;
 
 import javax.validation.constraints.Null;
-import java.time.Duration;
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.temporal.ChronoUnit;
+import java.time.temporal.Temporal;
 import java.util.Objects;
 
 public class TimeDistance {
@@ -13,12 +14,13 @@ public class TimeDistance {
         // make utility class
     }
 
-    public static long getDaysFrom(long epochMilliseconds, @Null LocalDateTime comparePoint) {
-        final Duration duration = Duration.ofMillis(epochMilliseconds);
-        LocalDateTime before = LocalDateTime.ofEpochSecond(duration.getSeconds(), duration.getNano(), ZoneOffset.UTC);
-        if (Objects.isNull(comparePoint)) {
-            comparePoint = LocalDateTime.now();
+    public static long getDaysFrom(long epochMilliseconds, @Null Temporal comparePoint) {
+        if (comparePoint instanceof LocalDateTime) {
+            comparePoint = ((LocalDateTime) comparePoint).toInstant(ZoneOffset.UTC);
         }
-        return ChronoUnit.DAYS.between(before, comparePoint);
+        if (Objects.isNull(comparePoint)) {
+            comparePoint = Instant.now();
+        }
+        return ChronoUnit.DAYS.between(Instant.ofEpochMilli(epochMilliseconds), comparePoint);
     }
 }
