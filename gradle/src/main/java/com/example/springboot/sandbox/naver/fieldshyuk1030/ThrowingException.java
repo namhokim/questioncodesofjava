@@ -14,10 +14,10 @@ public class ThrowingException {
 
     private static void startInstall() throws SpaceException, MemoryException {
         if (!enoughSpace()) {
-            throw new ThrowingException().new SpaceException("공간이 부족합니다.");
+            throw new SpaceException("공간이 부족합니다.");
         }
         if (!enoughMemeory()) {
-            throw new ThrowingException().new MemoryException("공간이 부족합니다.");
+            throw new MemoryException("공간이 부족합니다.");
         }
     }
 
@@ -32,13 +32,13 @@ public class ThrowingException {
     private static void copyFiles() {
     }
 
-    class SpaceException extends Exception {
+    static class SpaceException extends Exception {
         public SpaceException(String msg) {
             super(msg);
         }
     }
 
-    class MemoryException extends Exception {
+    static class MemoryException extends Exception {
         public MemoryException(String msg) {
             super(msg);
         }
