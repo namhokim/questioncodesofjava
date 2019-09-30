@@ -1,27 +1,26 @@
 package com.example.springboot.sandbox.naver.shoo2222;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class ArrayCompare {
     public static void main(String[] args) {
         String[] a = new String[]{"AA", "BB"};
         String[] b = new String[]{"BB", "CC"};
 
-        Set<String> setA = new HashSet<>(Arrays.asList(a));
-
+        Map<String, Integer> result = new HashMap<>();
+        for (String curr : a) {
+            result.put(curr, 2);
+        }
         for (String curr : b) {
-            if (setA.contains(curr)) {
-                System.out.println(curr + " : 0");
+            if (result.containsKey(curr)) {
+                result.put(curr, 1);
             } else {
-                System.out.println(curr + " : 1");
+                result.put(curr, 0);
             }
         }
 
-        setA.removeAll(new HashSet<>(Arrays.asList(b)));
-        for (String curr : setA) {
-            System.out.println(curr + " : 2");
+        for (Map.Entry<String, Integer> entry : result.entrySet()) {
+            System.out.println(entry.getKey() + " : " + entry.getValue());
         }
     }
 }
