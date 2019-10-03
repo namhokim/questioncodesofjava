@@ -29,7 +29,6 @@ dependencies {
     compile group: 'org.json', name: 'json', version: '20180813'
     compile group: 'commons-codec', name: 'commons-codec', version: '1.12'
     compile group: 'commons-net', name: 'commons-net', version: '3.6'
-    compile 'com.google.guava:guava:28.1-jre'
 
     implementation files('lib/chatting_server.jar')
     implementation files('lib/chatting_client.jar')

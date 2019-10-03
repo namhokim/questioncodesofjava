@@ -1,10 +1,9 @@
 package com.example.springboot.sandbox.naver.hhs9102;
 
-import com.google.common.base.Preconditions;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
-import java.util.Objects;
+import java.util.Optional;
 
 public class LocalDateTimeNullCheck {
     public static void main(String[] args) {
@@ -47,7 +46,8 @@ class MovieShowtime {
     }
 
     public boolean isBefore(LocalDateTime pointOnSale) {
-        Preconditions.checkArgument(Objects.nonNull(pointOnSale), "pointOnSale는 Non Null입니다.");
-        return pointOnSale.isBefore(start);
+        return Optional.ofNullable(pointOnSale)
+                .orElseThrow(() -> new IllegalArgumentException("pointOnSale는 Non Null입니다."))
+                .isBefore(start);
     }
 }
