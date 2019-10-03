@@ -1,15 +1,16 @@
 package com.example.springboot.sandbox.naver.hhs9102;
 
+import com.google.common.base.Preconditions;
 import lombok.Getter;
 
-import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class LocalDateTimeNullCheck {
     public static void main(String[] args) {
         Long idOfJoker2019 = 167613L;
         MovieShowtime showtime = getMovieShowtime(idOfJoker2019);
-        LocalDateTime pos = LocalDateTime.now();
+        LocalDateTime pos = null;
         if (showtime.isBefore(pos)) {
             System.out.println("You can buy the ticket");
         } else {
@@ -45,7 +46,8 @@ class MovieShowtime {
         return new MovieShowtime(movieId, start, end);
     }
 
-    public boolean isBefore(@NotNull LocalDateTime pointOnSale) {
+    public boolean isBefore(LocalDateTime pointOnSale) {
+        Preconditions.checkArgument(Objects.nonNull(pointOnSale), "pointOnSale는 Non Null입니다.");
         return pointOnSale.isBefore(start);
     }
 }
