@@ -5,8 +5,10 @@ import org.springframework.web.client.RestTemplate;
 
 public class RestTemplateWithReadTimeout {
     public RestTemplate getRestTemplate(int readTimeout) {
-        SimpleClientHttpRequestFactory simpleClientHttpRequestFactory = new SimpleClientHttpRequestFactory();
-        simpleClientHttpRequestFactory.setReadTimeout(readTimeout);
-        return new RestTemplate(simpleClientHttpRequestFactory);
+        return new RestTemplate((uri, httpMethod) -> {
+            SimpleClientHttpRequestFactory simpleClientHttpRequestFactory = new SimpleClientHttpRequestFactory();
+            simpleClientHttpRequestFactory.setReadTimeout(readTimeout);
+            return simpleClientHttpRequestFactory.createRequest(uri, httpMethod);
+        });
     }
 }
