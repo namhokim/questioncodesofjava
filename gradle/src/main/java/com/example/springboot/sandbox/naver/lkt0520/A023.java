@@ -10,7 +10,7 @@ public class A023 {
         System.out.println("숫자 2번을 입력하세요");
         int num2 = scanner.nextInt();
         System.out.println("연산자를 입력하세요");
-        char op = scanner.next().charAt(0); // operator (연산자)라는 의미로 이름을 부여했습니ㅣ다.
+        char op = scanner.next().charAt(0); // operator (연산자)라는 의미로 이름을 부여했습니다.
         double result = 0; // sum (합)이라는 의미는 연산자에 따라 달라지므로 의미가 부적합해보여 결과(result)로 이름을 바꾸었습니다.
         switch (op) {
             case '+':
