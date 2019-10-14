@@ -146,6 +146,8 @@ class Students {
                 if (stu[j].getId() < stu[min].getId()) {
                     min = j;
                 }
+            }
+            if (i != min) {
                 swap(i, min);
             }
         }
@@ -160,7 +162,9 @@ class Students {
                 if (stu[max].getScore() < stu[j].getScore())
                     max = j;
             }
-            swap(i, max);
+            if (i != max) {
+                swap(i, max);
+            }
         }
     }
 
