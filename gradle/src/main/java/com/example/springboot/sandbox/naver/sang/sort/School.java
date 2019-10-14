@@ -1,54 +1,55 @@
 package com.example.springboot.sandbox.naver.sang.sort;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
 public class School {
 
     public static void main(String[] args) {
-        Students stus = new Students();
+        Students students = new Students();
 
         // 학생 5명 추가
-        Stu stu1 = new Stu(1111, "aaaa", 56);
-        Stu stu2 = new Stu(2222, "bbbb", 32);
-        Stu stu3 = new Stu(3333, "cccc", 86);
-        Stu stu4 = new Stu(4444, "dddd", 65);
-        Stu stu5 = new Stu(5555, "eeee", 13);
-
-        Stu stutemp;
+        Student student1 = new Student(1111, "aaaa", 56);
+        Student student2 = new Student(2222, "bbbb", 32);
+        Student student3 = new Student(3333, "cccc", 86);
+        Student student4 = new Student(4444, "dddd", 65);
+        Student student5 = new Student(5555, "eeee", 13);
 
         // 배열에 저장
-        stus.append(stu1);
-        stus.append(stu2);
-        stus.append(stu3);
-        stus.append(stu4);
-        stus.append(stu5);
-        System.out.println("dddd학생의 정보");
+        students.append(student1);
+        students.append(student2);
+        students.append(student3);
+        students.append(student4);
+        students.append(student5);
 
-        stutemp = (Stu) stus.getByName("dddd");
-        stutemp.println();
+        System.out.println("dddd학생의 정보");
+        System.out.println(students.getByName("dddd"));
         System.out.println("-----------");
         System.out.println("학생 목록");
-        stus.print();
+        System.out.print(students);
         System.out.println("-----------");
         System.out.println("성적순 정렬");
-        stus.sortByScore();
-        stus.print();
+        students.sortByScore();
+        System.out.print(students);
         System.out.println("-----------");
         System.out.println("가장 점수가 낮은 학생의 정보");
 
-        stutemp = stus.StudentAt(4);
+        Student stutemp = students.StudentAt(4);
         stutemp.changeScore(90);
-        stutemp.println();
+        System.out.println(stutemp);
         System.out.println("-----------");
 
         System.out.println("학번순 정렬");
-        stus.sortById();
-        stus.print();
+        students.sortById();
+        System.out.print(students);
 
         System.out.println("-----------");
-        System.out.println("평균점수: " + stus.average());
+        System.out.println("평균점수: " + students.average());
     }
 }
 
-class Stu {
+class Student {
     // 학번
     private int id;
 
@@ -59,7 +60,7 @@ class Stu {
     private int score;
 
     // 생성자
-    public Stu(int id, String name, int score) {
+    public Student(int id, String name, int score) {
         this.id = id;
         this.name = name;
         this.score = score;
@@ -85,95 +86,77 @@ class Stu {
         this.score = score;
     }
 
-    // id, name, score를 출력하는 메소드
-    public void println() {
-        System.out.println("id: " + this.id + ", 이름: " + this.name + ", 성적:" + this.score);
+    @Override
+    public String toString() {
+        return "id: " + this.id + ", 이름: " + this.name + ", 성적:" + this.score;
     }
 }
 
 class Students {
-    // Stu 배열
-    private Stu[] stu;
-
-    // 현재 배열에 있는 Stu 객체 수
-    private int number = 0;
+    // Student 리스배열
+    private List<Student> students;
 
     // 생성자
     public Students() {
-        stu = new Stu[100];
+        students = new ArrayList<>();
     }
 
     // i번째 학생을 return
-    public Stu StudentAt(int i) {
-        return stu[i];
+    public Student StudentAt(int i) {
+        return students.get(i);
     }
 
     // 학생 추가
-    public void append(Stu s) {
-        stu[number++] = s;
+    public void append(Student s) {
+        students.add(s);
     }
 
     // name과 일치하는 이름의 학생 return
-    public Stu getByName(String name) {
-        for (int i = 0; i < number; i++) {
-            if (stu[i].getName().equals(name))
-                return stu[i];
+    public Student getByName(String name) {
+        for (Student student : students) {
+            if (student.getName().equals(name)) {
+                return student;
+            }
         }
         return null;
     }
 
-    // 배열 출력
-    public void print() {
-        for (int i = 0; i < number; i++) {
-            System.out.println("id:" + stu[i].getId() + ", 이름: " + stu[i].getName() + ",성적: " + stu[i].getScore());
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (Student s: students) {
+            sb.append(s);
+            sb.append(System.lineSeparator());
         }
-    }
-
-    // sort를 위한 메소드
-    private void swap(int i, int j) {
-        Stu temp;
-        temp = stu[i];
-        stu[i] = stu[j];
-        stu[j] = temp;
+        return sb.toString();
     }
 
     // 학번순으로 정렬
     public void sortById() {
-        int i, j, min;
-        for (i = 0; i < number - 1; i++) {
-            min = i;
-            for (j = i + 1; j < number; j++) {
-                if (stu[j].getId() < stu[min].getId()) {
-                    min = j;
-                }
+        students.sort(new Comparator<Student>() {
+            @Override
+            public int compare(Student s1, Student s2) {
+                return Integer.compare(s1.getId(), s2.getId());
             }
-            if (i != min) {
-                swap(i, min);
-            }
-        }
+        });
     }
 
     // 성적순으로 정렬
     public void sortByScore() {
-        int i, j, max;
-        for (i = 0; i < number - 1; i++) {
-            max = i;
-            for (j = i + 1; j < number; j++) {
-                if (stu[max].getScore() < stu[j].getScore())
-                    max = j;
+        students.sort(new Comparator<Student>() {
+            @Override
+            public int compare(Student s1, Student s2) {
+                return Integer.compare(s2.getScore(), s1.getScore());
             }
-            if (i != max) {
-                swap(i, max);
-            }
-        }
+        });
     }
 
     // 전체 학생의 평균을 return
     public double average() {
         int sum = 0;
-        for (int i = 0; i < number; i++) {
-            sum += stu[i].getScore();
+        for (Student student: students) {
+            sum += student.getScore();
         }
-        return (double) sum / number;
+        return (double) sum / students.size();
     }
 }
