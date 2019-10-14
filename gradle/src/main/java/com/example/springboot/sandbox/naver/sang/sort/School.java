@@ -133,22 +133,12 @@ class Students {
 
     // 학번순으로 정렬
     public void sortById() {
-        students.sort(new Comparator<Student>() {
-            @Override
-            public int compare(Student s1, Student s2) {
-                return Integer.compare(s1.getId(), s2.getId());
-            }
-        });
+        students.sort(Comparator.comparingInt(Student::getId));
     }
 
     // 성적순으로 정렬
     public void sortByScore() {
-        students.sort(new Comparator<Student>() {
-            @Override
-            public int compare(Student s1, Student s2) {
-                return Integer.compare(s2.getScore(), s1.getScore());
-            }
-        });
+        students.sort((s1, s2) -> Integer.compare(s2.getScore(), s1.getScore()));
     }
 
     // 전체 학생의 평균을 return
