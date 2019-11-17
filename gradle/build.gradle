@@ -21,7 +21,10 @@ configurations {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation "me.alidg:errors-spring-boot-starter:1.4.0"
+    implementation 'com.h2database:h2'
     compileOnly 'org.projectlombok:lombok'
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.8.1'
     compile('org.springframework.boot:spring-boot-starter-data-redis-reactive')
@@ -29,7 +32,6 @@ dependencies {
     compile group: 'org.json', name: 'json', version: '20180813'
     compile group: 'commons-codec', name: 'commons-codec', version: '1.12'
     compile group: 'commons-net', name: 'commons-net', version: '3.6'
-    compile "me.alidg:errors-spring-boot-starter:1.4.0"
 
     implementation files('lib/chatting_server.jar')
     implementation files('lib/chatting_client.jar')
