@@ -10,7 +10,7 @@ public class StringSource extends SimpleJavaFileObject {
         super(uri, kind);
     }
 
-    StringSource(String name, String code) {
+    public StringSource(String name, String code) {
         this(URI.create("string:///" + name.replace('.', '/') + ".java"), Kind.SOURCE);
         this.code = code;
     }
