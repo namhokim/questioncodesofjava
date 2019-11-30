@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Slf4j
 @RestController
@@ -23,8 +23,8 @@ public class DateController {
 
 @Value
 class DateResult {
-    private final Date start;
-    private final Date end;
+    private final LocalDateTime start;
+    private final LocalDateTime end;
 
     public DateResult(DateParam param) {
         this.start = param.getStart();
@@ -39,8 +39,8 @@ class DateResult {
 @Getter
 @Setter
 class DateParam {
-    private Date start;
-    private Date end;
+    private LocalDateTime start;
+    private LocalDateTime end;
 }
 
 
