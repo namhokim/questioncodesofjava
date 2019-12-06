@@ -1,5 +1,6 @@
 package com.example.springboot.sandbox.controller;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.Value;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Slf4j
 @RestController
@@ -18,6 +20,11 @@ public class DateController {
         final DateResult result = DateResult.from(dateParam);
         log.info(result.toString());
         return result;
+    }
+
+    @PostMapping("/updateCalendar")
+    public void updateCalendar(@RequestBody CalendarDTO calendar) {
+        log.info("updateCalendar : {}", calendar);
     }
 }
 
@@ -43,4 +50,17 @@ class DateParam {
     private LocalDateTime end;
 }
 
-
+@Data
+class CalendarDTO {
+    private Long cno;
+    private String title;
+    private Date start;
+    private Date end;
+    private String description;
+    private String type;
+    private String username;
+    private String userid;
+    private String backgroundColor;
+    private String textColor;
+    private boolean allDay;
+}
