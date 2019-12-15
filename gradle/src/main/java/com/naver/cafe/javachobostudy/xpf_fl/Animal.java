@@ -4,14 +4,14 @@ import java.util.List;
 
 public class Animal {
     private String name;
-    private List<Food> foods;
-
-    public Animal(String name) {
-        this.name = name;
-    }
+    protected List<Food> foods;
 
     public Animal(String name, List<Food> foods) {
         this.name = name;
         this.foods = foods;
+    }
+
+    public String getName() {
+        return name;
     }
 }
