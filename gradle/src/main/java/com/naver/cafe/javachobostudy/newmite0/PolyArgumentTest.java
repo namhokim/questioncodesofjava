@@ -4,13 +4,13 @@ public class PolyArgumentTest {
     public static void main(String[] args) {
         try {
             System.out.println("try...");
-            System.out.println(0 / 0);
+            System.out.println(0 / 0); // java.lang.ArithmeticException: / by zero
         } catch (Exception e) {
             System.out.println("catch...");
             try {
                 System.out.println("2 try...");
-//                return;
-                System.out.println(0 / 0);
+                return;
+                //System.out.println(0 / 0);
             } catch (Exception a) {
                 System.out.println("2 catch...");
             } finally {
