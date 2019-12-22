@@ -1,17 +1,11 @@
 package com.example.springboot.sandbox.domain.hhs9102;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class ProxyUser {
     private String username;
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public boolean isProxyUserByAnnotation() {
-        return this instanceof ProxyUser;
-    }
+    private boolean isProxyUserByAnnotation = true;
 }
