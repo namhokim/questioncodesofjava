@@ -6,7 +6,7 @@ public class Main {
         Parent fc = new FirstChild();
         pArr[0] = fc;
 
-        System.out.println(pArr);
+        System.out.println(pArr.toString());
         System.out.println(pArr[0]);
     }
 }
