@@ -21,7 +21,9 @@ public class PersonConstructor {
 //public Person...이 앞으로 당겨지지 않아서 이대로 쓰는것입니다.
 
     public PersonConstructor(String name, int age) {
-        this(name, age, "미상");
+        this.name = name;
+        this.age = age;
+        this.addr = "미상";
         System.out.println("나는 인자생성자[2] 입니다");
     }
 
