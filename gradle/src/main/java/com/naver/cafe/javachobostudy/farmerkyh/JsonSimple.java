@@ -1,20 +1,20 @@
 package com.naver.cafe.javachobostudy.farmerkyh;
 
-import org.json.JSONObject;
-import org.json.JSONTokener;
+import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONArray;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
+@Slf4j
 public class JsonSimple {
-    @SuppressWarnings("unchecked")
     public static void main(String[] args) {
-        String jsString = "{\"A\":\"a\",\"B\":\"b\",\"C\":\"c\"}";
-        JSONTokener jsonTokener = new JSONTokener(jsString);
-        JSONObject jsonObject = new JSONObject(jsonTokener);
-
-        JSONArray array = new JSONArray();
-        array.add(jsonObject);
-        array.add(jsonObject);
-        array.add(jsonObject);
-        System.out.println(array);
+        String jsString = "[{\"A\":\"a\",\"B\":\"b\",\"C\":\"c\"},{\"A\":\"a\",\"B\":\"b\",\"C\":\"c\"},{\"A\":\"a\",\"B\":\"b\",\"C\":\"c\"}]";
+        JSONParser parser = new JSONParser();
+        try {
+            JSONArray jsonArray = (JSONArray) parser.parse(jsString);
+            System.out.println(jsonArray);
+        } catch (ParseException | ClassCastException e) {
+            log.error("JSON Parse error: {}", jsString);
+        }
     }
 }

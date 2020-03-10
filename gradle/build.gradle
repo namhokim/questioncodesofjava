@@ -35,7 +35,6 @@ dependencies {
     compile group: 'commons-net', name: 'commons-net', version: '3.6'
     compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
 
-
     implementation files('lib/chatting_server.jar')
     implementation files('lib/chatting_client.jar')
 
