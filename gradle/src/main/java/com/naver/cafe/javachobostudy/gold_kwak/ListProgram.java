@@ -3,6 +3,10 @@ package com.naver.cafe.javachobostudy.gold_kwak;
 public class ListProgram {
 	String prog = "field";
 
+	public ListProgram() {
+		this.prog = "constructor";
+	}
+
 	public static void main(String[] args) {
 		ExamList list = new ExamList();
 		list.exams[0] = new Exam();
