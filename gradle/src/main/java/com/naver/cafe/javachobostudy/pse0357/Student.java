@@ -10,6 +10,7 @@ public class Student extends Person{
         this.studentId = studentId;
     }
 
+    @Override
     String info() {
         return super.info() + ", 학번 : " + studentId;
     }
