@@ -5,16 +5,17 @@ public class Break {
         for (int i = 0; i < 10; i++) {
             System.out.println("for loop");
             if (i > 5) {
+                System.out.println("for loop break;");
                 break;
             }
         }
 
         int j = 0;
-        label:
         while (j < 10) {
             System.out.println("while loop");
             if (j > 5) {
-                break label;
+                System.out.println("while loop break");
+                break;
             }
             j++;
         }
@@ -22,10 +23,10 @@ public class Break {
 
         switch (j) {
             default:
-                System.out.println("default");
+                System.out.println("default break");
                 break;
-            case 10:
-                System.out.println("switch ten");
+            case 6:
+                System.out.println("switch break");
                 break;
         }
     }
