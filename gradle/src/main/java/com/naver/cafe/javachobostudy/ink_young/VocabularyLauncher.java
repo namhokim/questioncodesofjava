@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class VocabularyLauncher {
-    enum VocabularyLauncherMenu {
+    public enum VocabularyLauncherMenu {
         ADD_WORD(1),
         SHOW_WORDS_LIST(2),
         CHANGE_WORD(3),

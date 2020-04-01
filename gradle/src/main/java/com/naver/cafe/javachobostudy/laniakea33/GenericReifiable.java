@@ -1,5 +1,6 @@
 package com.naver.cafe.javachobostudy.laniakea33;
 
+@SuppressWarnings("unchecked")
 public class GenericReifiable {
     static class Entry<K, V> {
         final K key;

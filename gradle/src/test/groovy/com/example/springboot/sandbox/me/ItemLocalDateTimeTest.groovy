@@ -24,7 +24,7 @@ class ItemLocalDateTimeTest extends Specification {
 
     def "Gson으로 JSON으로 변환한다."() {
         given: "임의의 아이템을 생성한다."
-        def item = new ItemLocalDateTime(1, "sample", "namo", LocalDateTime.now())
+        def item = new ItemLocalDateTime(1, "sample", "namo", LocalDateTime.of(2019, 5, 15, 10, 57, 11, 837000000))
 
         and:
         Gson gson = new Gson()
@@ -38,7 +38,7 @@ class ItemLocalDateTimeTest extends Specification {
 
     def "Jackson으로 JSON으로 변환한다."() {
         given: "임의의 아이템을 생성한다."
-        def item = new ItemLocalDateTime(1, "sample", "namo", LocalDateTime.now())
+        def item = new ItemLocalDateTime(1, "sample", "namo", LocalDateTime.of(2019, 5, 15, 10, 57, 11, 837000000))
 
         and:
         ObjectMapper objectMapper = new ObjectMapper()
@@ -47,6 +47,6 @@ class ItemLocalDateTimeTest extends Specification {
         String json = objectMapper.writeValueAsString(item)
 
         then:
-        json == '{"id":1,"name":"sample","createBy":"namo","createAt":{"second":25,"dayOfYear":135,"year":2019,"month":"MAY","dayOfMonth":15,"dayOfWeek":"WEDNESDAY","monthValue":5,"hour":10,"minute":57,"nano":679000000,"chronology":{"id":"ISO","calendarType":"iso8601"}}}'
+        json == '{"id":1,"name":"sample","createBy":"namo","createAt":"2019-05-15T10:57:11.837"}'
     }
 }

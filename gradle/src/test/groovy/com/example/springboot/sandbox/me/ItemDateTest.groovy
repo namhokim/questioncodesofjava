@@ -31,7 +31,7 @@ class ItemDateTest extends Specification {
         String json = gson.toJson(item)
 
         then:
-        json == '{"id":1,"name":"sample","createBy":"namo","createAt":"May 15, 2019 10:55:06 AM"}'
+        json == '{"id":1,"name":"sample","createBy":"namo","createAt":"2020-04-01T14:27:52.199+0900"}'
     }
 
     Gson getGsonWithBuilder() {
@@ -53,6 +53,6 @@ class ItemDateTest extends Specification {
         String json = objectMapper.writeValueAsString(item)
 
         then:
-        json == '{"id":1,"name":"sample","createBy":"namo","createAt":1557885389440}'
+        json == '{"id":1,"name":"sample","createBy":"namo","createAt":"2020-04-01T14:27:52.218+0900"}'
     }
 }

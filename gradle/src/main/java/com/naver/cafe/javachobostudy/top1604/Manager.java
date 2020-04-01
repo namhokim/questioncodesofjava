@@ -14,6 +14,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.io.FileNotFoundException;
 
+@SuppressWarnings("unchecked")
 public class Manager extends JFrame implements ActionListener {
 
     String[] departments = {"컴퓨터공학부", "전자공학과", "기계공학과", "건축공학과", "간호학과",
