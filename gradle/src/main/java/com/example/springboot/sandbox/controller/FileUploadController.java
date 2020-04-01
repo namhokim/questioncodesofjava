@@ -26,7 +26,7 @@ public class FileUploadController {
     }
 
     @GetMapping("/")
-    public String listUploadedFiles(Model model) throws IOException {
+    public String listUploadedFiles(Model model) {
 
         model.addAttribute("files", storageService.loadAll().map(
                 path -> MvcUriComponentsBuilder.fromMethodName(FileUploadController.class,
@@ -46,8 +46,7 @@ public class FileUploadController {
     }
 
     @PostMapping("/")
-    public String handleFileUpload(@RequestParam("file") MultipartFile file,
-                                   RedirectAttributes redirectAttributes) {
+    public String handleFileUpload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
 
         storageService.store(file);
         redirectAttributes.addFlashAttribute("message",
