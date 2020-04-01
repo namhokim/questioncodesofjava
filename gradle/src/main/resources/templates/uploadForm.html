@@ -1,4 +1,9 @@
+<!DOCTYPE html>
 <html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Upload form</title>
+</head>
 <body>
 
 <div th:if="${message}">
@@ -6,11 +11,12 @@
 </div>
 
 <div>
-    <form method="POST" enctype="multipart/form-data" action="/">
+    <form method="POST" enctype="multipart/form-data" action="/" accept-charset="UTF-8">
         <table>
             <tr><td>File to upload:</td><td><input type="file" name="file" /></td></tr>
             <tr><td></td><td><input type="submit" value="Upload" /></td></tr>
         </table>
+        <input type="hidden" name="_charset_" />
     </form>
 </div>
 
