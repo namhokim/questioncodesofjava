@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class Action {
     public void actionPerformed(ActionEvent e) {
-        File file = new File("C:\\Users\\PC\\Desktop\\새 폴더\\Person.txt");
+        File file = new File("/Users/namo/Desktop/Person.txt");
         Scanner sc;
         try {
             sc = new Scanner(file);
@@ -19,5 +19,10 @@ public class Action {
             // TODO Auto-generated catch block
             e1.printStackTrace();
         }
+    }
+
+    public static void main(String[] args) {
+        Action action = new Action();
+        action.actionPerformed(null);
     }
 }
