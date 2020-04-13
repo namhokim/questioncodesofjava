@@ -1,5 +1,6 @@
 package com.naver.cafe.javachobostudy.tjdgns5968;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,10 +12,7 @@ public class Tokenize {
     }
 
     private static Set<String> tokenize(String line) {
-        HashSet<String> epa = new HashSet<String>();
-        epa.add( );
-        epa.add( );
-        epa.add( );
-        return epa;
+        final String[] s = line.split(" ");
+        return new HashSet<>(Arrays.asList(s));
     }
 }
