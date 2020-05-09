@@ -4,7 +4,8 @@ import java.util.*;
 
 public class MathRandom {
     public static void main(String[] args) {
-        double rnd = Math.random();
+        Random random = new Random();
+        int rnd = random.nextInt();
         System.out.println(rnd);
     }
 }
