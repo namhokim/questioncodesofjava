@@ -10,8 +10,8 @@ public class MaxFrequencyRandom {
         int[] counts = new int[SIZE_OF_RANGE];
 
         for (int i = 0; i < 100; i++) {
-            int generatedNumber = (int) (Math.random() * SIZE_OF_RANGE) + 1;
-            counts[generatedNumber - 1]++;
+            int generatedNumber = (int) (Math.random() * SIZE_OF_RANGE);
+            counts[generatedNumber]++;
         }
 
         System.out.print("정수:");
