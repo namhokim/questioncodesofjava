@@ -1,6 +1,9 @@
 package com.naver.cafe.javachobostudy.jameseeho;
 
 public class AnotherClass {
-    Tv t2 = new Tv();
-    t2.channel = 2;
+    public Tv createIntance() {
+        Tv tv = new Tv();
+        tv.channel = 2;
+        return tv;
+    }
 }
