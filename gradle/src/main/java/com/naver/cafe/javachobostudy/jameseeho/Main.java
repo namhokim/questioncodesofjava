@@ -2,7 +2,7 @@ package com.naver.cafe.javachobostudy.jameseeho;
 
 public class Main {
     public static void main(String[] args) {
-        final Tv intance = AnotherClass.createIntance();
+        final Tv intance = Tvs.createIntance();
         System.out.println(intance.channel);
     }
 }
