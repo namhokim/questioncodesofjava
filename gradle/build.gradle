@@ -1,6 +1,6 @@
 plugins {
-    id 'org.springframework.boot' version '2.1.7.RELEASE'
-    id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+    id 'org.springframework.boot' version '2.3.0.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
     id 'java'
     id 'groovy'
 }
@@ -24,13 +24,14 @@ dependencies {
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
 
     compileOnly 'org.projectlombok:lombok'
+    runtimeOnly 'com.h2database:h2'
 
+    implementation 'javax.validation:validation-api:2.0.1.Final'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-aop'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation "me.alidg:errors-spring-boot-starter:1.4.0"
-    implementation 'com.h2database:h2'
     implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.8.1'
     implementation('org.springframework.boot:spring-boot-starter-data-redis-reactive')
     implementation group: 'commons-codec', name: 'commons-codec', version: '1.12'

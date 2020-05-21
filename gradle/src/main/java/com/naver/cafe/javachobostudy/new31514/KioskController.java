@@ -21,7 +21,7 @@ public class KioskController {
 
     @ResponseBody
     @PostMapping(value = "/kiosk/callinfo",
-            consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+            consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public CallResponse callinfo(@RequestBody CallRequest callRequest) {
 
         final List<CallVO> callVo = callInfoService.callInfo(callRequest.getSName());
