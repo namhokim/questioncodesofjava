@@ -22,6 +22,12 @@ public class CountWords {
         Map<String, Long> counted = words
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
-        System.out.println(counted);
+        System.out.println(entriesSortedByValues(counted));
+    }
+
+    private static <K, V extends Comparable<? super V>> List<Map.Entry<K, V>> entriesSortedByValues(Map<K, V> map) {
+        List<Map.Entry<K, V>> sortedEntries = new ArrayList<>(map.entrySet());
+        sortedEntries.sort((e1, e2) -> e2.getValue().compareTo(e1.getValue()));
+        return sortedEntries;
     }
 }
