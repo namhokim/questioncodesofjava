@@ -21,6 +21,7 @@ public class CountWords {
         Stream<String> words = lines.flatMap(line -> Stream.of(line.split(TOKENIZE_REGEX)));
         Map<String, Long> counted = words
                 .filter(word -> !word.isEmpty())
+                .map(String::toLowerCase)
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
         System.out.println(entriesSortedByValues(counted));
