@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 
 public class CountWords {
 
-    private static final String TOKENIZE_REGEX = " +";
+    private static final String TOKENIZE_REGEX = " +|`|'|\"|-|_|\\(|\\)|:|\\.|,|!|;|\\?";
 
     public static void main(String[] args) throws IOException {
         final String fileName = "/Users/namo/Desktop/alice_in_wonderland.txt";
