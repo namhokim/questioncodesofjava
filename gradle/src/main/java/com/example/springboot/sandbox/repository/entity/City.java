@@ -1,4 +1,4 @@
-package com.example.springboot.sandbox.domain;
+package com.example.springboot.sandbox.repository.entity;
 
 import lombok.Getter;
 import lombok.Setter;

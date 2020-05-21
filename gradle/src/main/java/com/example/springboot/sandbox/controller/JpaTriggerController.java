@@ -1,7 +1,7 @@
 package com.example.springboot.sandbox.controller;
 
-import com.example.springboot.sandbox.domain.City;
-import com.example.springboot.sandbox.domain.CityRepository;
+import com.example.springboot.sandbox.repository.entity.City;
+import com.example.springboot.sandbox.repository.CityRepository;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
