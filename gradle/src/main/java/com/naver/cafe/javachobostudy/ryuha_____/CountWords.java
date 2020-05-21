@@ -20,6 +20,7 @@ public class CountWords {
         Stream<String> lines = Files.lines(path);
         Stream<String> words = lines.flatMap(line -> Stream.of(line.split(TOKENIZE_REGEX)));
         Map<String, Long> counted = words
+                .filter(word -> !word.isEmpty())
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
         System.out.println(entriesSortedByValues(counted));
