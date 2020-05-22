@@ -12,6 +12,7 @@ public class Point {
         y = b;
     }
 
+    @Override   // Error:(15, 5) java: method does not override or implement a method from a supertype
     public boolean equals(Point p) {
         return ( p.x == x && p.y == y);
     }
