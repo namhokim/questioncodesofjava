@@ -1,9 +1,11 @@
 package com.naver.cafe.javachobostudy.mong97;
 
+import java.util.Objects;
+
 public class Point {
     int x, y;
 
-    public Point () {
+    public Point() {
         x = y = 0;
     }
 
@@ -12,8 +14,20 @@ public class Point {
         y = b;
     }
 
-    @Override   // Error:(15, 5) java: method does not override or implement a method from a supertype
-    public boolean equals(Point p) {
-        return ( p.x == x && p.y == y);
+    @Override
+    public boolean equals(Object p) {
+        if (this == p) {
+            return true;
+        }
+        if (!(p instanceof Point)) {
+            return false;
+        }
+        Point point = (Point) p;
+        return this.x == point.x && this.y == point.y;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y);
     }
 }
