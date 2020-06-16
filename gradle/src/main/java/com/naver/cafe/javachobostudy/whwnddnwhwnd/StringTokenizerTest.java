@@ -13,11 +13,9 @@ public class StringTokenizerTest {
 
         int[] arr = new int[1000];
         System.out.println("출력");
-        int i = 0;
-        while (str.hasMoreTokens()) {
+        for (int i = 0; i < str.countTokens(); i++) {
             arr[i] = Integer.parseInt(str.nextToken());
             System.out.println(arr[i]);
-            i++;
         }
     }
 }
