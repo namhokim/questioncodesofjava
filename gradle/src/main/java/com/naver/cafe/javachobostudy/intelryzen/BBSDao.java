@@ -1,24 +1,22 @@
 package com.naver.cafe.javachobostudy.intelryzen;
 
-import com.google.common.base.Preconditions;
-
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Objects;
 
-import static com.google.common.base.Preconditions.*;
+import static com.google.common.base.Preconditions.checkState;
 
 public class BBSDao {
     /**
      * eg) 2020-06-16 16:30:49
      */
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
     /**
      * 게시판(BBS)의 ID는 1부터 시작한다고 가정한다.
      */
-    public static final int DEFAULT_BBS_ID = 1;
-    public static final int FIRST_COLUMN = 1;
+    private static final int DEFAULT_BBS_ID = 1;
+    private static final int FIRST_COLUMN = 1;
 
     private Connection conn = null;
 
@@ -49,8 +47,8 @@ public class BBSDao {
         }
     }
 
-    public int write(String bbsTitle, String bbsContent, String userId) {
-        String query = "insert into BBS values(?, ?, ?, ?, ?, ?)";
+    public void write(String bbsTitle, String bbsContent, String userId) {
+        String query = "insert into BBS (bbsId, title, userId, dt, content, cnt) values (?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, getNext());
@@ -59,11 +57,10 @@ public class BBSDao {
             pstmt.setString(4, now());
             pstmt.setString(5, bbsContent);
             pstmt.setInt(6, 1);
-            return pstmt.executeUpdate();
+            pstmt.executeUpdate();
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new BbsWriteException(e);
         }
-        return -5;
     }
 
     private String now() {
@@ -75,6 +72,12 @@ public class BBSDao {
      */
     public static class NextSequenceGenerationException extends RuntimeException {
         public NextSequenceGenerationException(Throwable cause) {
+            super(cause);
+        }
+    }
+
+    public static class BbsWriteException extends RuntimeException {
+        public BbsWriteException(Throwable cause) {
             super(cause);
         }
     }
