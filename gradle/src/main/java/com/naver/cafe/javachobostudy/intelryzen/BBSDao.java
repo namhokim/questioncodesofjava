@@ -6,54 +6,54 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class BBSDao {
-    private Connection conn =null;
-    private PreparedStatement pstmt=null;
-    private ResultSet rs=null;
+    private Connection conn = null;
+    private PreparedStatement pstmt = null;
+    private ResultSet rs = null;
 
     public BBSDao() {
-        try{
-        String dbUrl = "jdbc:mysql://localhost:3306/BBS";
-        String dbId = "root";
-        String dbPassword = "1234";
-        Class.forName("com.mysql.jdbc.Driver");
-        conn = DriverManager.getConnection(dbUrl, dbId, dbPassword);
+        try {
+            String dbUrl = "jdbc:mysql://localhost:3306/BBS";
+            String dbId = "root";
+            String dbPassword = "1234";
+            Class.forName("com.mysql.jdbc.Driver");
+            conn = DriverManager.getConnection(dbUrl, dbId, dbPassword);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public String getDate(){
+    public String getDate() {
         String query = "select NOW()";
-        try{
+        try {
             pstmt = conn.prepareStatement(query);
-            rs= pstmt.executeQuery();
-            if (rs.next()){
+            rs = pstmt.executeQuery();
+            if (rs.next()) {
                 return rs.getString(1);
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return "";
     }
 
-    public int getNext(){
+    public int getNext() {
         String query = "select bbsId from BBS order by bbsId desc";
-        try{
+        try {
             pstmt = conn.prepareStatement(query);
-            rs= pstmt.executeQuery();
-            if (rs.next()){
-                return rs.getInt(1)+1;
+            rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) + 1;
             }
             return 1;
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return -4;// 데이터베이스 오류
     }
 
-    public int write(String bbsTitle,String bbsContent,String userId) {
+    public int write(String bbsTitle, String bbsContent, String userId) {
         String query = "insert into BBS values(?, ?, ?, ?, ?, ?)";
-        try{
+        try {
             pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, getNext());
             pstmt.setString(2, bbsTitle);
@@ -62,7 +62,7 @@ public class BBSDao {
             pstmt.setString(5, bbsContent);
             pstmt.setInt(6, 1);
             return pstmt.executeUpdate();
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return -5;
