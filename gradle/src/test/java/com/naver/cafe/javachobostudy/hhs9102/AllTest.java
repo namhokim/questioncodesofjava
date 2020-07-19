@@ -1,6 +1,8 @@
 package com.naver.cafe.javachobostudy.hhs9102;
 
 import java.util.*;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 import org.junit.Test;
@@ -42,6 +44,30 @@ public class AllTest {
         for (String str1 : list1) {
             if (list2Set.contains(str1)) {
                 doSomething(str1, str1);
+            }
+        }
+    }
+
+    @Test
+    public void test4() {
+        executeWhenMatchElement(list1, list2, (str) -> System.out.println(String.format("str1: %s, str2: %s", str, str)));
+    }
+
+    private void executeWhenMatchElement(List<String> list1, List<String> list2,
+                                         Consumer<String> executeFunction) {
+        final List<String> smaller, bigger;
+        if (list1.size() < list2.size()) {
+            smaller = list1;
+            bigger = list2;
+        } else {
+            smaller = list2;
+            bigger = list1;
+        }
+
+        Set<String> smallerSet = new HashSet<>(smaller);
+        for (String value : bigger) {
+            if (smallerSet.contains(value)) {
+                executeFunction.accept(value);
             }
         }
     }
