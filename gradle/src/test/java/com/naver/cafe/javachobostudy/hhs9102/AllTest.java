@@ -1,11 +1,10 @@
 package com.naver.cafe.javachobostudy.hhs9102;
 
+import org.junit.Test;
+
 import java.util.*;
 import java.util.function.Consumer;
-import java.util.function.Supplier;
 import java.util.stream.Collectors;
-
-import org.junit.Test;
 
 public class AllTest {
     List<String> list1 = Arrays.asList("a", "b", "c");
