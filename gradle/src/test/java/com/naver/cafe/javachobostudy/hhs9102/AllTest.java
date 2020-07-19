@@ -1,8 +1,6 @@
 package com.naver.cafe.javachobostudy.hhs9102;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import org.junit.Test;
@@ -34,6 +32,16 @@ public class AllTest {
         for (Map.Entry<String, String> map1Entry : map1.entrySet()) {
             if (map2.get(map1Entry.getKey()) != null) {
                 doSomething(map1Entry.getValue(), map2.get(map1Entry.getKey()));
+            }
+        }
+    }
+
+    @Test
+    public void test3() {
+        Set<String> list2Set = new HashSet<>(list2);
+        for (String str1 : list1) {
+            if (list2Set.contains(str1)) {
+                doSomething(str1, str1);
             }
         }
     }
