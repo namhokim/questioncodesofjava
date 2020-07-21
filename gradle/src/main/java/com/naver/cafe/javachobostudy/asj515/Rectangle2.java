@@ -8,7 +8,7 @@ public class Rectangle2 {
         Rectangle bedroom = new Rectangle(18,15);
         Rectangle bedroom2 = new Rectangle(10,8);
 
-        Rectangle[] rooms = new Rectangle(5);
+        Rectangle[] rooms = new Rectangle[5];
         rooms[0] = kitchen;
         rooms[0] = livingroom;
         rooms[0] = den;
