@@ -2,11 +2,11 @@ package com.naver.cafe.javachobostudy.asj515;
 
 public class Rectangle2 {
     public static void main(String[] args) {
-        Rectangle kitchen = new Rectangle(20, 15);
-        Rectangle livingRoom = new Rectangle(20, 20); // 거실은 living room 으로 복합 단어이므로 R로 단어를 구분
-        Rectangle den = new Rectangle(15, 10);
-        Rectangle bedroom = new Rectangle(18, 15);
-        Rectangle bedroom2 = new Rectangle(10, 8);
+        Rectangle kitchen = Rectangle.of(20, 15);
+        Rectangle livingRoom = Rectangle.of(20, 20); // 거실은 living room 으로 복합 단어이므로 R로 단어를 구분
+        Rectangle den = Rectangle.of(15, 10);
+        Rectangle bedroom = Rectangle.of(18, 15);
+        Rectangle bedroom2 = Rectangle.of(10, 8);
 
         Rectangle[] rooms = new Rectangle[5];
         rooms[0] = kitchen;

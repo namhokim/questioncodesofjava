@@ -11,9 +11,14 @@ public class Rectangle {
     public int getWidth() {
         return width;
     }
-    public Rectangle(int length, int width) {    // 축약된 len, wid 보다는 전체 단어가 이해하기 쉬움
-        this.length = length;   // 멤버변수와 이름이 겹치므로 this.length 로 구별해줌
-        this.width = width;     // 멤버변수와 이름이 겹치므로 this.width 로 구별해줌
+
+    private Rectangle(int length, int width) {
+        this.length = length;
+        this.width = width;
+    }
+
+    public static Rectangle of(int length, int width) {
+        return new Rectangle(length, width);
     }
 
     public int getArea() {
