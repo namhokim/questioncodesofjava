@@ -1,6 +1,7 @@
 package com.naver.cafe.javachobostudy.asj515;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class Rectangle2 {
@@ -15,11 +16,10 @@ public class Rectangle2 {
         System.out.println(computeArea(rooms));
     }
 
-    public static int computeArea(Iterable<Rectangle> rooms) {  // static method로 변경
-        int squarefoot = 0;
-        for (Rectangle room : rooms) { // enhanced for loop으로 변경
-            squarefoot += room.getArea(); // x = x + y 는 x += y 로 변경 가능
-        }
-        return squarefoot;
+    public static int computeArea(Collection<Rectangle> rooms) {  // static method로 변경
+        return rooms.stream()
+                .map(Rectangle::getArea)
+                .mapToInt(Integer::intValue)
+                .sum();
     }
 }
