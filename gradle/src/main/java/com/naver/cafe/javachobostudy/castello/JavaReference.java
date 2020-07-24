@@ -1,4 +1,4 @@
 package com.naver.cafe.javachobostudy.castello;
 
-public interface JavaReference extends Handle {
+public interface JavaReference extends Pointers {
 }

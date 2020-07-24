@@ -1,4 +1,4 @@
 package com.naver.cafe.javachobostudy.castello;
 
-public interface Handle {
+public interface Pointers {
 }
