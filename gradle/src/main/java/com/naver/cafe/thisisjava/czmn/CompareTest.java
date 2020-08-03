@@ -1,21 +1,21 @@
 package com.naver.cafe.thisisjava.czmn;
 
 import java.util.Comparator;
-import java.util.List;
-import java.util.stream.Collectors;
 
 // https://cafe.naver.com/thisisjava/26168
 public class CompareTest {
     public static void main(String[] args) {
-        List<Person> people = List.of( // List.of는 Java 9 이상이 필요..
-                new Person("200729", "홍길동", 22),
-                new Person("211225", "김방자", 18),
-                new Person("020316", "아버지", 34));
+        Person hong = new Person("200729", "홍길동", 22);
+        Person bang = new Person("211225", "김방자", 18);
 
-        System.out.println(people);
-        List<Person> peopleSortedByName = people.stream()
-                .sorted(Comparator.comparing(Person::getName))
-                .collect(Collectors.toList());
-        System.out.println(peopleSortedByName);
+        Comparator<Person> compareByAge = new PersonCompareByAge();
+        int result1 = compareByAge.compare(hong, bang);
+        System.out.println(result1);
+
+        int result2 = compareByAge.compare(bang, hong);
+        System.out.println(result2);
+
+        int result3 = compareByAge.compare(hong, hong);
+        System.out.println(result3);
     }
 }

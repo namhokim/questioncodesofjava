@@ -5,20 +5,13 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.annotation.Nonnull;
-import java.util.Comparator;
 
 @Getter
 @Setter
-public class Person implements Comparable<Person> {
-    private static Comparator<Person> comparator = Comparator.comparing(Person::getId);
-
+public class Person implements Comparable<Animal> {
     private String id;
     private String name;
     private int age;
-
-    public static void setComparator(Comparator<Person> comparator) {
-        Person.comparator = comparator;
-    }
 
     // getter, setter 생략
 
@@ -39,7 +32,7 @@ public class Person implements Comparable<Person> {
     }
 
     @Override
-    public int compareTo(@Nonnull Person person) {
-        return Person.comparator.compare(this, person);
+    public int compareTo(@Nonnull Animal animal) {
+        return this.age - animal.getAge();
     }
 }
