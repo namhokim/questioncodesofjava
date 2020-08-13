@@ -1,4 +1,4 @@
-package com.naver.cafe.thisisjava.wave1033513;
+package com.naver.cafe.thisisjava.nineteenvalen;
 
 public class SurfaceOfTrapezoidal {
     public static void main(String[] args) {
