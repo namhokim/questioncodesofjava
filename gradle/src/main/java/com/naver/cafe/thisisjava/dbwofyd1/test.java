@@ -1,7 +1,5 @@
 package com.naver.cafe.thisisjava.dbwofyd1;
 
-import lombok.SneakyThrows;
-
 import java.io.IOException;
 
 public class test {
