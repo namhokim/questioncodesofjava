@@ -13,14 +13,10 @@ public class test {
 		int keycode = 0;
 
 		while(run) {
-			if(keycode != 13 && keycode != 10) {
-				//CR(13)->커서를 맨 앞으로 이동, LF(10)->다음줄로 이동
-				//CR과 LF을 모두 실행하여야 Enter와 같은 효과
-				System.out.println("--------------------");
-				System.out.println("1.증속 | 2.감소 | 3.중지");
-				System.out.println("--------------------");
-				System.out.println("선택: ");
-			}
+			System.out.println("--------------------");
+			System.out.println("1.증속 | 2.감소 | 3.중지");
+			System.out.println("--------------------");
+			System.out.println("선택: ");
 
 			keycode = System.in.read();
 
