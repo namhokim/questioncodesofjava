@@ -31,6 +31,9 @@ public class test {
 			else if(keycode == 51) {
 				run = false;
 			}
+			else {
+				System.out.println(keycode);
+			}
 		}
 
 		System.out.println("프로그램 종료");
