@@ -19,16 +19,16 @@ public class practice {
 
             keycode = System.in.read();
 
-            if(keycode == 49) {
-                speed++;
-                System.out.println("현재 속도=" + speed);
-            }
-            else if(keycode == 50) {
-                speed--;
-                System.out.println("현재 속도=" + speed);
-            }
-            else if(keycode == 51) {
-                run = false;
+            switch (keycode) {
+                case 49:
+                    speed++;
+                    System.out.println("현재 속도=" + speed);
+                case 50:
+                    speed--;
+                    System.out.println("현재 속도=" + speed);
+                default:
+                    run = false;
+                    break;
             }
         }
 
