@@ -5,7 +5,7 @@ public class SingleArrayObject {
 
     public static void main(String[] args) {
         Object[] object = new Object[6];
-        MultipleArrayInt.printObjectSize(object);
+        SingleArrayInt.printObjectSize(object);
 
         for (int i = 0; i< 100; i++) {
             createObjectArray(i);
@@ -18,7 +18,7 @@ public class SingleArrayObject {
         if (arrayObjects instanceof Object) {
             System.out.println("Yes!");
         }
-        MultipleArrayInt.printObjectSize(arrayObjects);
+        SingleArrayInt.printObjectSize(arrayObjects);
 //        initializeArray(arrayObjects);
 //        MultipleArrayInt.printObjectSize(arrayObjects);
     }
