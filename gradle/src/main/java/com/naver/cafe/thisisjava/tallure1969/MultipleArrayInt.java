@@ -1,6 +1,6 @@
 package com.naver.cafe.thisisjava.tallure1969;
 
-import com.naver.InstrumentationAgent;
+//import com.naver.InstrumentationAgent;
 
 // VM options: -javaagent:$ProjectFileDir$/lib/InstrumentationAgent.jar
 public class MultipleArrayInt {
@@ -19,7 +19,7 @@ public class MultipleArrayInt {
     }
 
     public static void printObjectSize(Object object) {
-        System.out.println("Object type: " + object.getClass() +
-                ", size: " + InstrumentationAgent.getObjectSize(object) + " bytes");
+//        System.out.println("Object type: " + object.getClass() +
+//                ", size: " + InstrumentationAgent.getObjectSize(object) + " bytes");
     }
 }
