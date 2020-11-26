@@ -7,6 +7,14 @@ public class GenericMethodTest {
 
     public static void main(String[] args) {
         GenericMethodTest test = new GenericMethodTest();
-        test.printFirstChar("ABCDE");
+
+        String ofString = "ABC";
+        test.printFirstChar(ofString);
+
+        StringBuilder ofStringBuilder = new StringBuilder();
+        ofStringBuilder.append('1');
+        ofStringBuilder.append('2');
+        ofStringBuilder.append('3');
+        test.printFirstChar(ofStringBuilder);
     }
 }
