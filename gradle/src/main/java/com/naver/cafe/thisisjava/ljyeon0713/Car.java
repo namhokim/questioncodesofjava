@@ -12,6 +12,7 @@ public class Car {
     }
 
     public static void main(String[] args) {
-        speed = 20;
+        Car car = new Car();
+        car.speed = 20;
     }
 }
