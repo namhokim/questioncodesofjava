@@ -5,14 +5,17 @@ public class DetectOverflow {
     public static int safeAdd(int left, int right)
     {
         if ((right > 0)) {
-            if (left > (Integer.MAX_VALUE - right))  // <-- 이 부분을 if(left+right > Integer.MAX_VALUE)로
+//            if (left > (Integer.MAX_VALUE - right))  // <-- 이 부분을
+            int result = left + right;
+            if (left + right > Integer.MAX_VALUE)
             {
                 throw new ArithmeticException("오버플로우 발생");
             }
         }
         else
         {
-            if (left < (Integer.MIN_VALUE - right)) // <--  이 부분을 if(left+right < Integer.MIN_VALUE)로
+//            if (left < (Integer.MIN_VALUE - right)) // <--  이 부분을
+            if(left+right < Integer.MIN_VALUE)
             {
                 throw new ArithmeticException("오버플로우 발생");
             }
@@ -21,7 +24,7 @@ public class DetectOverflow {
     }
 
     public static void main(String[] args) {
-        final int i = DetectOverflow.safeAdd(Integer.MAX_VALUE, Integer.MAX_VALUE);
+        final int i = DetectOverflow.safeAdd(Integer.MAX_VALUE - 1, 1);
         System.out.println(i);
     }
 
