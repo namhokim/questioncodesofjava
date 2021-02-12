@@ -33,9 +33,10 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-aop'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation "me.alidg:errors-spring-boot-starter:1.4.0"
     implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.8.1'
-    implementation('org.springframework.boot:spring-boot-starter-data-redis-reactive')
+    //implementation('org.springframework.boot:spring-boot-starter-data-redis-reactive')
     implementation group: 'commons-codec', name: 'commons-codec', version: '1.12'
     implementation group: 'commons-net', name: 'commons-net', version: '3.6'
     implementation group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.2'
