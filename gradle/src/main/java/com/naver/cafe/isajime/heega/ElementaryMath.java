@@ -11,7 +11,7 @@ public class ElementaryMath {
             int remain1 = dividend1 % divisor;
             int remain2 = dividend2 % divisor;
             if (remain1 == remain2) {
-                System.out.println(divisor);
+                System.out.printf("%d <= %d, %d\n", divisor, remain1, remain2);
             }
         }
     }
